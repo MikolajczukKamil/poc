@@ -1,18 +1,23 @@
-import { Entity, Column, PrimaryColumn, VersionColumn } from 'typeorm';
+import { Exclude } from 'class-transformer'
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
+
+import { FooEntity } from './Foo.entity'
 
 @Entity({ name: 'foo-data' })
 export class FooDataEntity {
-  @PrimaryColumn()
-  id: number;
+  @PrimaryColumn({ generated: true })
+  id!: number
 
   @Column()
-  data: string;
+  data: string
 
-  @VersionColumn()
-  version = 0;
+  @Exclude()
+  @JoinColumn({ name: 'foo_id' })
+  @ManyToOne(() => FooEntity, foo => foo.list)
+  foo: FooEntity
 
-  constructor(id: number, data: string) {
-    this.id = id;
-    this.data = data;
+  constructor(data: string, foo: FooEntity) {
+    this.data = data
+    this.foo = foo
   }
 }

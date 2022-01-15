@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
-import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
+import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions'
+import { Injectable } from '@nestjs/common'
+import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm'
 
-import { OptimisticLockingSubscriber } from './OptimisticLocking.subscriber';
+import { OptimisticLockingSubscriber } from './OptimisticLocking/OptimisticLocking.subscriber'
 
 @Injectable()
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
@@ -15,13 +15,13 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       schema: 'public',
       username: 'postgres',
       password: 'postgres',
-      database: 'postgres',
-    };
+      database: 'postgres'
+    }
 
     return {
       autoLoadEntities: true,
       ...dbConfig,
-      subscribers: [OptimisticLockingSubscriber],
-    };
+      subscribers: [ OptimisticLockingSubscriber ]
+    }
   }
 }

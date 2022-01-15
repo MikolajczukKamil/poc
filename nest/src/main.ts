@@ -1,18 +1,19 @@
-import {
-  initializeTransactionalContext,
-  patchTypeORMRepositoryWithBaseRepository,
-} from 'typeorm-transactional-cls-hooked';
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, Reflector } from '@nestjs/core'
+import { ClassSerializerInterceptor } from '@nestjs/common'
 
-import { MainModule } from './main.module';
+import { MainModule } from './main.module'
+import { TransactionalAspectOnBootstrap } from './TransactionalAspect/TransactionalAspectOnBootstrap'
 
 async function bootstrap() {
-  initializeTransactionalContext();
-  patchTypeORMRepositoryWithBaseRepository();
+  TransactionalAspectOnBootstrap()
 
-  const app = await NestFactory.create(MainModule);
+  const app = await NestFactory.create(MainModule)
 
-  await app.listen(3000);
+  await app
+    .useGlobalInterceptors(
+      new ClassSerializerInterceptor(app.get(Reflector), { excludePrefixes: [ '_' ] })
+    )
+    .listen(3000)
 }
 
-bootstrap().then(console.info, console.error);
+bootstrap().then(console.info, console.error)
