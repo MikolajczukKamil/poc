@@ -13,6 +13,15 @@ export class AppRxController {
   ) {
   }
 
+  @Get(':id')
+  get(@Param('id') id: string) {
+    return this.appService.get(+id)
+      .pipe(
+        switchMap(() => this.appService.get(+id))
+      )
+  }
+
+
   @Get()
   getAll() {
     return this.appService.getAll()
@@ -38,6 +47,12 @@ export class AppRxController {
         )
       )
     )
+  }
+
+  @Transactional()
+  @Get('transactional/:id')
+  getTransactional(@Param('id') id: string) {
+    return this.get(id)
   }
 
   @Transactional()

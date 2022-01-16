@@ -1,26 +1,6 @@
 // https://github.com/typeorm/typeorm/issues/3608#issuecomment-476352843
 import { EntitySubscriberInterface, EventSubscriber, UpdateEvent } from 'typeorm'
 
-export class OptimisticLockVersionMismatchError extends Error {
-  readonly entityName: string
-  readonly entityId: string
-
-  constructor(
-    entity: any,
-    public readonly expectedVersion: number,
-    public readonly actualVersion: number
-  ) {
-    super(
-      `The optimistic lock on entity ${
-        entity?.constructor?.name || entity.toString()
-      } failed, version ${ expectedVersion } was expected, but is actually ${ actualVersion }.`
-    )
-
-    this.entityId = entity.id || '-'
-    this.entityName = entity?.constructor?.name || entity.toString()
-  }
-}
-
 const EXPECTED_VERSION_METADATA = Symbol('EXPECTED_VERSION')
 
 @EventSubscriber()
@@ -55,11 +35,11 @@ export class OptimisticLockingSubscriber implements EntitySubscriberInterface {
       )
 
       if (expectedVersion !== actualVersion) {
-        throw new OptimisticLockVersionMismatchError(
-          entity,
-          expectedVersion,
-          actualVersion
-        )
+        // throw new OptimisticLockVersionMismatchError(
+        //   entity.constructor.name,
+        //   expectedVersion,
+        //   actualVersion
+        // )
       }
     }
   }

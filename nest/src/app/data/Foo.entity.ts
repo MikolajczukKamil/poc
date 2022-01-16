@@ -27,6 +27,6 @@ export class FooEntity {
   }
 
   addData(data: string): void {
-    this.list = [ ...this.list, new FooDataEntity(data, this) ]
+    this.list.push(new FooDataEntity(data, this))
   }
 }

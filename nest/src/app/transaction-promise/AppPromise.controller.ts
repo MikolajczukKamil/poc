@@ -16,6 +16,13 @@ export class AppPromiseController {
   ) {
   }
 
+  @Get(':id')
+  async get(@Param('id') id: string) {
+    await this.appService.get(+id)
+
+    return this.appService.get(+id)
+  }
+
   @Get()
   async getAll() {
     return this.appService.getAll()
@@ -40,6 +47,12 @@ export class AppPromiseController {
         this.appService.save(entity2)
       ]
     )
+  }
+
+  @Transactional()
+  @Get('transactional/:id')
+  async getTransactional(@Param('id') id: string) {
+    return this.get(id)
   }
 
   @Transactional()

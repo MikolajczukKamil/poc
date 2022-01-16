@@ -13,14 +13,14 @@ export class AppPromiseService {
   }
 
   async get(id: number): Promise<FooEntity> {
-    return this.fooRepo.findOneOrFail(id)
+    return this.fooRepo.findOneOrFail(id, { lock: { mode: 'optimistic', version: 1 } })
   }
 
   async getAll(): Promise<FooEntity[]> {
-    return this.fooRepo.find()
+    return this.fooRepo.find({ lock: { mode: 'optimistic', version: 2 } })
   }
 
   async save(foo: FooEntity): Promise<FooEntity> {
-    return this.fooRepo.save(foo, {})
+    return this.fooRepo.save(foo)
   }
 }

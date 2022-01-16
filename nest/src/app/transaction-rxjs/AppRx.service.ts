@@ -14,11 +14,11 @@ export class AppRxService {
   }
 
   get(id: number): Observable<FooEntity> {
-    return from(this.fooRepo.findOneOrFail(id))
+    return from(this.fooRepo.findOneOrFail(id, { lock: { mode: 'optimistic', version: 1 } }))
   }
 
   getAll(): Observable<FooEntity[]> {
-    return from(this.fooRepo.find())
+    return from(this.fooRepo.find({ lock: { mode: 'optimistic', version: 2 } }))
   }
 
   save(foo: FooEntity): Observable<FooEntity> {
