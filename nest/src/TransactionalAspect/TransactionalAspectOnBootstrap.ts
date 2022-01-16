@@ -3,7 +3,7 @@ import {
   patchTypeORMRepositoryWithBaseRepository
 } from 'typeorm-transactional-cls-hooked'
 
-export function TransactionalAspectOnBootstrap() {
+export function TransactionalAspectOnBootstrap(): void {
   initializeTransactionalContext()
   patchTypeORMRepositoryWithBaseRepository()
 }

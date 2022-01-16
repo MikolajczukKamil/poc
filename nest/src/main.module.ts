@@ -1,13 +1,15 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 
-import { AppModule } from './app/App.module'
 import { TypeOrmConfigService } from './TypeOrmConfig.service'
+import { SimpleOptimisticLockingExampleModule } from './app/SimpleOptimisticLockingExample/SimpleOptimisticLockingExample.module'
+import { NestedEntityOptimisticLockingExampleModule } from './app/NestedEntityOptimisticLockingExample/NestedEntityOptimisticLockingExample.module'
 
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
-    AppModule
+    SimpleOptimisticLockingExampleModule,
+    NestedEntityOptimisticLockingExampleModule
   ]
 })
 export class MainModule {
