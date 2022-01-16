@@ -1,4 +1,4 @@
-import { Entity, OneToMany, PrimaryGeneratedColumn, VersionColumn } from 'typeorm'
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, VersionColumn } from 'typeorm'
 
 import { FooDataEntity } from './FooData.entity'
 
@@ -6,6 +6,9 @@ import { FooDataEntity } from './FooData.entity'
 export class FooEntity {
   @PrimaryGeneratedColumn()
   id: number
+
+  @Column()
+  name: string
 
   @VersionColumn()
   version = 0
@@ -22,8 +25,9 @@ export class FooEntity {
   @OneToMany(() => FooDataEntity, fooData => fooData.foo, { eager: true, cascade: true })
   list!: FooDataEntity[]
 
-  constructor(id: number) {
+  constructor(id: number, name: string) {
     this.id = id
+    this.name = name
   }
 
   addData(data: string): void {

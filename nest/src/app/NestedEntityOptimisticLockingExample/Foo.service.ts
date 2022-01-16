@@ -2,10 +2,11 @@ import { Repository } from 'typeorm'
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 
-import { FooEntity } from '../data/Foo/Foo.entity'
+import { FooEntity } from './Data/Foo.entity'
+import { RepoService } from '../shared/Updater'
 
 @Injectable()
-export class AppPromiseService {
+export class FooService implements RepoService<FooEntity> {
   constructor(
     @InjectRepository(FooEntity)
     private readonly fooRepo: Repository<FooEntity>
@@ -13,11 +14,11 @@ export class AppPromiseService {
   }
 
   async get(id: number): Promise<FooEntity> {
-    return this.fooRepo.findOneOrFail(id, { lock: { mode: 'optimistic', version: 1 } })
+    return this.fooRepo.findOneOrFail(id)
   }
 
   async getAll(): Promise<FooEntity[]> {
-    return this.fooRepo.find({ lock: { mode: 'optimistic', version: 2 } })
+    return this.fooRepo.find()
   }
 
   async save(foo: FooEntity): Promise<FooEntity> {
