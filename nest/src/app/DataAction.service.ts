@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 
-import { FooEntity } from './data/Foo.entity'
+import { FooEntity } from './data/Foo/Foo.entity'
 
 @Injectable()
 export class DataActionService {
