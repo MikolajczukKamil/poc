@@ -3,9 +3,10 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 
 import { BarEntity } from './data/Bar.entity'
+import { RepoService } from '../shared/Updater'
 
 @Injectable()
-export class BarService {
+export class BarService implements RepoService<BarEntity> {
   constructor(
     @InjectRepository(BarEntity)
     private readonly fooRepo: Repository<BarEntity>
