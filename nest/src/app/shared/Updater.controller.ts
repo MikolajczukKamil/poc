@@ -2,8 +2,13 @@ import { delay, from, map, Observable, of, switchMap, tap, timer, zip } from 'rx
 import { Transactional } from 'typeorm-transactional-cls-hooked'
 import { Get } from '@nestjs/common'
 
-import { getValue } from '../util/getValue'
-import { wait } from '../util/wait'
+function getValue(): string {
+  return new Date().getTime().toString()
+}
+
+function wait(time: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, time))
+}
 
 export interface UpdatableEntity {
   version: number
