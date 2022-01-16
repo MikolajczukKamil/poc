@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 
 import { BarEntity } from './data/Bar.entity'
-import { RepoService } from '../shared/Updater'
+import { RepoService } from '../shared/Updater.controller'
 
 @Injectable()
 export class BarService implements RepoService<BarEntity> {

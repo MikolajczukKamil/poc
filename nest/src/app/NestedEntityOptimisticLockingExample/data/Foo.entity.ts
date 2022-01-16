@@ -1,9 +1,10 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn, VersionColumn } from 'typeorm'
 
 import { FooDataEntity } from './FooData.entity'
+import { UpdatableEntity } from '../../shared/Updater.controller'
 
 @Entity({ name: 'foo' })
-export class FooEntity {
+export class FooEntity implements UpdatableEntity {
   @PrimaryGeneratedColumn()
   id: number
 
