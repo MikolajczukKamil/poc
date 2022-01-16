@@ -1,0 +1,405 @@
+{
+	"info": {
+		"_postman_id": "8d76ae58-bfe4-41fc-8448-aa3640a79f96",
+		"name": "POC NestJS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SimpleOptimisticLockingExample",
+			"item": [
+				{
+					"name": "Promise",
+					"item": [
+						{
+							"name": "promise/single",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/ol-simple/promise/single",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"ol-simple",
+										"promise",
+										"single"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "promise/transactional/single",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/ol-simple/promise/transactional/single",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"ol-simple",
+										"promise",
+										"transactional",
+										"single"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "promise/concurrent",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/ol-simple/promise/concurrent",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"ol-simple",
+										"promise",
+										"concurrent"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "promise/transactional/concurrent",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/ol-simple/promise/transactional/concurrent",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"ol-simple",
+										"promise",
+										"transactional",
+										"concurrent"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Rx",
+					"item": [
+						{
+							"name": "rx/single",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/ol-simple/rx/single",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"ol-simple",
+										"rx",
+										"single"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "rx/transactional/single",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/ol-simple/rx/transactional/single",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"ol-simple",
+										"rx",
+										"transactional",
+										"single"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "rx/concurrent",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/ol-simple/rx/concurrent",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"ol-simple",
+										"rx",
+										"concurrent"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "rx/transactional/concurrent",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/ol-simple/rx/transactional/concurrent",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"ol-simple",
+										"rx",
+										"transactional",
+										"concurrent"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "select all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/ol-simple/all",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"ol-simple",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "NestedEntityOptimisticLockingExample",
+			"item": [
+				{
+					"name": "Promise",
+					"item": [
+						{
+							"name": "promise/single",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/ol-nested/promise/single",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"ol-nested",
+										"promise",
+										"single"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "promise/transactional/single",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/ol-nested/promise/transactional/single",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"ol-nested",
+										"promise",
+										"transactional",
+										"single"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "promise/concurrent",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/ol-nested/promise/concurrent",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"ol-nested",
+										"promise",
+										"concurrent"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "promise/transactional/concurrent",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/ol-nested/promise/transactional/concurrent",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"ol-nested",
+										"promise",
+										"transactional",
+										"concurrent"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Rx",
+					"item": [
+						{
+							"name": "rx/single",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/ol-nested/rx/single",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"ol-nested",
+										"rx",
+										"single"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "rx/transactional/single",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/ol-nested/rx/transactional/single",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"ol-nested",
+										"rx",
+										"transactional",
+										"single"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "rx/concurrent",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/ol-nested/rx/concurrent",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"ol-nested",
+										"rx",
+										"concurrent"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "rx/transactional/concurrent",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/ol-nested/rx/transactional/concurrent",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"ol-nested",
+										"rx",
+										"transactional",
+										"concurrent"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "select all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/ol-nested/all",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"ol-nested",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
