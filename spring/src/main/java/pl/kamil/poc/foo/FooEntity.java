@@ -1,21 +1,25 @@
 package pl.kamil.poc.foo;
 
+import lombok.Data;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name="foo")
-public class FooEntity {
+public class FooEntity implements Serializable {
     @Id()
-    public int id;
+    private int id;
 
     @Column()
-    public String name;
+    private String name;
 
     @OneToMany(
             mappedBy = "foo",
             fetch = FetchType.EAGER,
             cascade = CascadeType.ALL
     )
-    public List<FooDataEntity> list;
+    private List<FooDataEntity> list;
 }

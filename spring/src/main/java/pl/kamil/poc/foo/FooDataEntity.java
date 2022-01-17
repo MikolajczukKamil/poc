@@ -1,25 +1,35 @@
 package pl.kamil.poc.foo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name="foo_data")
-public class FooDataEntity {
+public class FooDataEntity implements Serializable  {
+    @Getter()
+    @Setter()
     @Id()
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    Integer id;
+    private Integer id = null;
 
+    @Getter()
+    @Setter()
     @Column()
-    String data;
+    private String data = null;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @Setter()
     @JoinColumn(name = "foo_id", nullable = false)
-    FooEntity foo;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    private FooEntity foo = null;
+
+    @JsonIgnore
+    public FooEntity getFoo() {
+        return this.foo;
+    }
 }
