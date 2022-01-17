@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping(value = "/spring")
@@ -17,15 +19,14 @@ public class FooController {
     public FooEntity test() {
         try {
             var entity = fooRepository.getById(1);
-            var entity2 = fooRepository.getById(1);
 
-            System.out.println(entity == entity2);
+            TimeUnit.SECONDS.sleep(2);
 
             if (entity.getList() == null) {
                  entity.setList(new ArrayList<>());
             }
 
-             entity.getList().add(new FooDataEntity(null, "Test", entity));
+             entity.getList().add(new FooDataEntity(null, LocalDateTime.now().toString(), entity));
 
              fooRepository.save(entity);
 

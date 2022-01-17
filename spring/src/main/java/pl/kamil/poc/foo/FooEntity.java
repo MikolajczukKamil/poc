@@ -16,6 +16,9 @@ public class FooEntity implements Serializable {
     @Column()
     private String name;
 
+    @Column()
+    private Integer version;
+
     @OneToMany(
             mappedBy = "foo",
             fetch = FetchType.EAGER,

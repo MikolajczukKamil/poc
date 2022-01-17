@@ -14,7 +14,7 @@ public class FooDataEntity implements Serializable  {
     @Getter()
     @Setter()
     @Id()
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id = null;
 
     @Getter()
