@@ -3,7 +3,7 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
 
 import { FooEntity } from './Foo.entity'
 
-@Entity({ name: 'foo-data' })
+@Entity({ name: 'foo_data' })
 export class FooDataEntity {
   @PrimaryColumn({ generated: true })
   id!: number
