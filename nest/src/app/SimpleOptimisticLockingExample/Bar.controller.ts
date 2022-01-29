@@ -1,12 +1,12 @@
-import { Controller } from '@nestjs/common'
+import { Controller }        from '@nestjs/common'
+import { UpdaterController } from '../shared/Updater.controller'
 
 import { BarService } from './Bar.service'
-import { BarEntity } from './data/Bar.entity'
-import { UpdaterController } from '../shared/Updater.controller'
+import { BarEntity }  from './data/Bar.entity'
 
 @Controller('ol-simple')
 export class BarController extends UpdaterController<BarEntity> {
-  constructor(protected override readonly repoService: BarService) {
-    super()
+  constructor(barService: BarService) {
+    super(barService)
   }
 }
