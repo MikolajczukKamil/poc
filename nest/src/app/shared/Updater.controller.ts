@@ -1,4 +1,4 @@
-import { delay, from, map, Observable, of, switchMap, tap, timer, zip } from 'rxjs'
+import { catchError, delay, from, map, Observable, of, switchMap, tap, timer, zip } from 'rxjs'
 import { Transactional } from 'typeorm-transactional-cls-hooked'
 import { Get } from '@nestjs/common'
 
@@ -40,26 +40,31 @@ export abstract class UpdaterController<T extends UpdatableEntity> {
     return this.updateDataPromise(1)
   }
 
-  @Transactional()
   @Get('promise/transactional/single')
   async promiseTransactionalSingle() {
-    return this.promiseSingle()
+    return this.updateDataPromiseTransactional(1)
   }
 
   // Promise - Concurrent
 
   @Get('promise/concurrent')
   async promiseConcurrent() {
-    return Promise.all([
-      this.updateDataPromise(1),
-      wait(1000).then(() => this.updateDataPromise(1))
-    ])
+    return this.promiseTest('updateDataPromise')
+
   }
 
-  @Transactional()
   @Get('promise/transactional/concurrent')
   async promiseTransactionalConcurrent() {
-    return this.promiseConcurrent()
+    return this.promiseTest('updateDataPromiseTransactional')
+  }
+
+  private async promiseTest(method: 'updateDataPromise' | 'updateDataPromiseTransactional') {
+    return Promise.all([
+      this[method](1),
+      wait(1000)
+        .then(() => this[method](1))
+        .catch(() => null)
+    ]).then(this.mapValue)
   }
 
 
@@ -70,28 +75,35 @@ export abstract class UpdaterController<T extends UpdatableEntity> {
     return this.updateDataRx(1)
   }
 
-  @Transactional()
   @Get('rx/transactional/single')
   rxTransactionalSingle() {
-    return this.rxSingle()
+    return this.updateDataRxTransactional(1)
   }
 
   // Rx - Concurrent
 
   @Get('rx/concurrent')
   rxConcurrent() {
-    return zip([
-      this.updateDataRx(1),
-      timer(1000).pipe(switchMap(() => this.updateDataRx(1)))
-    ])
+    return this.rxTest('updateDataRx')
   }
 
-  @Transactional()
   @Get('rx/transactional/concurrent')
   rxTransactionalConcurrent() {
-    return this.rxConcurrent()
+    return this.rxTest('updateDataRxTransactional')
   }
 
+  private rxTest(methodName: 'updateDataRxTransactional' | 'updateDataRx') {
+    return zip([
+      this[methodName](1),
+      timer(1000)
+        .pipe(
+          switchMap(() => this[methodName](1)),
+          catchError(() => of(null))
+        )
+    ]).pipe(map(this.mapValue))
+  }
+
+  // updateDataPromise
 
   private async updateDataPromise(id: number): Promise<T> {
     const data = getValue()
@@ -110,6 +122,13 @@ export abstract class UpdaterController<T extends UpdatableEntity> {
 
     return result
   }
+
+  @Transactional()
+  private async updateDataPromiseTransactional(id: number): Promise<T> {
+    return this.updateDataPromise(id)
+  }
+
+  // updateDataRx
 
   private updateDataRx(id: number): Observable<T> {
     const data = getValue()
@@ -133,4 +152,16 @@ export abstract class UpdaterController<T extends UpdatableEntity> {
         tap((entity) => console.info(`  -- SAVE END ${ data }, v=${ entity.version }`))
       )
   }
+
+  @Transactional()
+  private updateDataRxTransactional(id: number): Observable<T> {
+    return this.updateDataRx(id)
+  }
+
+  // helpers
+
+  private mapValue = (result: [ T, T | null ]) => ({
+    result,
+    equal: result[0] === result[1]
+  })
 }
