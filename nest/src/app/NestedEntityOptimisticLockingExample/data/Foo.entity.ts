@@ -1,19 +1,19 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn, VersionColumn } from 'typeorm'
 
-import { FooDataEntity } from './FooData.entity'
 import { UpdatableEntity } from '../../shared/Updater.controller'
+import { FooDataEntity }   from './FooData.entity'
 
 @Entity({ name: 'foo' })
 export class FooEntity implements UpdatableEntity {
   @PrimaryGeneratedColumn()
   id: number
-
+  
   @Column()
   name: string
-
+  
   @VersionColumn()
   version = 0
-
+  
   /**
    * InitializedRelationError:
    * Array initializations are not allowed in entity relations.
@@ -25,12 +25,12 @@ export class FooEntity implements UpdatableEntity {
    */
   @OneToMany(() => FooDataEntity, fooData => fooData.foo, { eager: true, cascade: true })
   list!: FooDataEntity[]
-
+  
   constructor(id: number, name: string) {
     this.id = id
     this.name = name
   }
-
+  
   addData(data: string): void {
     this.list.push(new FooDataEntity(data, this))
   }

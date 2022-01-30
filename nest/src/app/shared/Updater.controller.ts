@@ -67,7 +67,6 @@ export abstract class UpdaterController<T extends UpdatableEntity> {
     ]).then(this.mapValue)
   }
 
-
   // Rx - Single
 
   @Get('rx/single')
