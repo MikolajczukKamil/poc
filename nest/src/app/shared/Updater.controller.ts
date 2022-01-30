@@ -25,7 +25,8 @@ export interface RepoService<T> {
 }
 
 export abstract class UpdaterController<T extends UpdatableEntity> {
-  protected abstract readonly repoService: RepoService<T>
+  protected constructor(protected readonly repoService: RepoService<T>) {
+  }
 
   @Get('all')
   getAll(): Promise<T[]> {

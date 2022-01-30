@@ -7,13 +7,13 @@ import { FooDataEntity }   from './FooData.entity'
 export class FooEntity implements UpdatableEntity {
   @PrimaryGeneratedColumn()
   id: number
-  
+
   @Column()
   name: string
-  
+
   @VersionColumn()
   version = 0
-  
+
   /**
    * InitializedRelationError:
    * Array initializations are not allowed in entity relations.
@@ -25,13 +25,15 @@ export class FooEntity implements UpdatableEntity {
    */
   @OneToMany(() => FooDataEntity, fooData => fooData.foo, { eager: true, cascade: true })
   list!: FooDataEntity[]
-  
+
   constructor(id: number, name: string) {
     this.id = id
     this.name = name
   }
-  
+
   addData(data: string): void {
+    // this.name += Math.round(Math.random() * 100).toString()
+
     this.list.push(new FooDataEntity(data, this))
   }
 }
